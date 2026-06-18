@@ -25,6 +25,9 @@ const canonicalPath = `/stories/${storyDate(story)}/${story.data.slug}/`;
   description={story.data.summary}
   canonicalPath={canonicalPath}
 >
+  <nav class="story-nav">
+    <a href="/">藍永倫ê故事</a>
+  </nav>
   <article class="story-article">
     <Content />
   </article>
