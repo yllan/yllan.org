@@ -1,0 +1,190 @@
+:root {
+  color-scheme: light;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #171717;
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  background: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+rt {
+  font-size: 50%;
+}
+
+.site-shell {
+  width: min(600px, calc(100% - 2rem));
+  margin: 4rem auto 0;
+}
+
+.site-header {
+  margin: 3rem 0;
+}
+
+.site-header section {
+  padding: 0.5rem 0;
+}
+
+.site-title {
+  margin: 1rem 0;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 900;
+}
+
+.year-heading {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.story-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.story-item {
+  margin: 1rem 0;
+}
+
+.story-link {
+  display: block;
+}
+
+.story-meta {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.story-title {
+  max-width: 28rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.story-rule {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  margin: 0 0.5rem;
+  border: 0;
+  border-bottom: 1px dotted #4b5563;
+}
+
+.story-date {
+  flex: 0 0 auto;
+}
+
+.story-summary {
+  display: -webkit-box;
+  max-width: 480px;
+  margin: 0.25rem 0 0;
+  overflow: hidden;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-weight: 200;
+  line-height: 1.25rem;
+  text-align: justify;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.story-article {
+  width: min(600px, calc(100% - 2rem));
+  margin: 4rem auto;
+}
+
+.story-article h1,
+.story-article h2,
+.story-article h3 {
+  font-weight: 700;
+}
+
+.story-article h1 {
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.story-article h2 {
+  margin: 2rem 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.story-article p {
+  margin: 1.5rem 0;
+  font-weight: 300;
+  line-height: 1.625;
+}
+
+.story-article a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.image-link {
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.image-link:hover {
+  text-decoration: none;
+}
+
+.grayscale {
+  filter: grayscale(1);
+}
+
+.site-footer {
+  margin: 2.5rem 0;
+  color: #6b7280;
+  font-size: 0.75rem;
+  font-style: italic;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .site-shell,
+  .story-article {
+    width: calc(100% - 2rem);
+    margin-top: 2.5rem;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .story-title {
+    max-width: none;
+    white-space: normal;
+  }
+}

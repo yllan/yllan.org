@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import SiteIntro from "../components/SiteIntro.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { formatListDate, groupStoriesByYear, site, storyDate, storyUrl } from "../lib/site";
+
+const stories = (await getCollection("stories")).sort(
+  (a, b) => storyDate(b).localeCompare(storyDate(a)),
+);
+const storyGroups = groupStoriesByYear(stories);
+---
+
+<BaseLayout title={site.title} description={site.description} canonicalPath="/">
+  <div class="site-shell">
+    <SiteIntro />
+    <main>
+      {storyGroups.map(([year, items]) => (
+        <section class="year-section">
+          <h2 class="year-heading">{year}</h2>
+          <ol class="story-list">
+            {items.map((story) => (
+              <li class="story-item">
+                <a class="story-link" href={storyUrl(story)}>
+                  <div class="story-meta">
+                    <h3 class="story-title">{story.data.title}</h3>
+                    <hr class="story-rule" />
+                    <time class="story-date" datetime={storyDate(story)}>
+                      {formatListDate(story.data.date)}
+                    </time>
+                  </div>
+                  <p class="story-summary">{story.data.summary}</p>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </main>
+    <footer class="site-footer">- 1 -</footer>
+  </div>
+</BaseLayout>

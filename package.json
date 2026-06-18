@@ -1,0 +1,18 @@
+{
+  "name": "yllan-org",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 4173",
+    "serve": "npm run build && npm run preview"
+  },
+  "dependencies": {
+    "astro": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.1"
+  }
+}

@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { site, storyDate } from "../../../../lib/site";
+
+export async function getStaticPaths() {
+  const stories = await getCollection("stories");
+
+  return stories.map((story) => ({
+    params: {
+      date: storyDate(story),
+      slug: story.data.slug,
+    },
+    props: { story },
+  }));
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+const canonicalPath = `/stories/${storyDate(story)}/${story.data.slug}/`;
+---
+
+<BaseLayout
+  title={`${story.data.title} | ${site.title}`}
+  description={story.data.summary}
+  canonicalPath={canonicalPath}
+>
+  <article class="story-article">
+    <Content />
+  </article>
+  <footer class="site-footer">- end -</footer>
+</BaseLayout>
