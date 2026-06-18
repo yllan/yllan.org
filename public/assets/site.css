@@ -75,6 +75,14 @@ rt {
   display: block;
 }
 
+.story-link:hover {
+  text-decoration: none;
+}
+
+.story-link:hover .story-title {
+  text-decoration: underline;
+}
+
 .story-meta {
   display: flex;
   align-items: baseline;
@@ -115,7 +123,7 @@ rt {
   text-align: justify;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  text-decoration-line: none;
+  text-decoration: none;
 }
 
 .story-nav {
