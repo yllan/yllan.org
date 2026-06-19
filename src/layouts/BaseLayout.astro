@@ -1,5 +1,6 @@
 ---
 import { site } from "../lib/site";
+import "../styles/site.css";
 
 interface Props {
   title?: string;
@@ -25,8 +26,8 @@ const canonical = new URL(canonicalPath, site.url).toString();
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-    <link rel="stylesheet" href="/assets/site.css" />
   </head>
   <body>
     <slot />

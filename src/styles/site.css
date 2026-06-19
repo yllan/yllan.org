@@ -54,8 +54,24 @@ rt {
   font-weight: 900;
 }
 
+.feed-bar {
+  margin: 0 0 1rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: right;
+}
+
+.feed-bar a {
+  color: inherit;
+}
+
+.feed-bar a:hover {
+  color: #374151;
+  text-decoration: none;
+}
+
 .year-heading {
-  margin: 1rem 0;
+  margin: 2rem 0 1rem;
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;

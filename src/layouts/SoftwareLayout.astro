@@ -1,0 +1,42 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { site } from "../lib/site";
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath: string;
+  filename?: string;
+}
+
+const {
+  title,
+  description = "",
+  canonicalPath,
+  filename,
+} = Astro.props;
+
+const windowTitle = filename ?? `${title}.txt`;
+---
+
+<BaseLayout
+  title={`${title} | ${site.title}`}
+  description={description}
+  canonicalPath={canonicalPath}
+>
+  <div class="mac-desktop">
+    <div class="mac-window">
+      <div class="mac-titlebar">
+        <span class="mac-closebox"></span>
+        <span class="mac-title">{windowTitle}</span>
+        <span class="mac-zoombox"></span>
+      </div>
+      <div class="mac-content">
+        <slot />
+      </div>
+    </div>
+    <div class="mac-footer">
+      <a href="/">← 回藍永倫ê故事</a>
+    </div>
+  </div>
+</BaseLayout>
