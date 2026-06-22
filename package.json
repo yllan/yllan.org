@@ -7,8 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview --host 0.0.0.0 --port 4173",
-    "serve": "npm run build && npm run preview",
-    "deploy": "astro build && wrangler pages deploy dist/ --project-name yllan-org --commit-dirty=true"
+    "serve": "npm run build && npm run preview"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.18",
