@@ -1,0 +1,40 @@
+---
+import { render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { softwareIndexUrl } from "../lib/site";
+
+interface Props {
+  app: CollectionEntry<"software">;
+}
+
+const { app } = Astro.props;
+const { Content } = await render(app);
+const home = softwareIndexUrl(app.data.lang);
+
+const download = app.data.download;
+const dlLabel = app.data.lang === "zh" ? "下載" : "Download";
+const dlVersion = app.data.version;
+---
+
+<div class="mac-window mac-detail-window" data-app={app.id}>
+  <div class="mac-titlebar">
+    <a href={home} class="mac-closebox mac-detail-close" aria-label="Close"></a>
+    <span class="mac-stripe"></span>
+    <span class="mac-title">READ ME!</span>
+    <span class="mac-stripe"></span>
+    <span class="mac-collapsebox"></span>
+  </div>
+  <div class="mac-content">
+    {
+      download && (
+        <div class="app-download">
+          <a class="mac-button" href={download}>
+            {dlLabel}
+          </a>
+          {dlVersion && <span class="dl-meta">v{dlVersion}</span>}
+        </div>
+      )
+    }
+    <Content />
+  </div>
+</div>

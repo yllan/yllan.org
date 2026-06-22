@@ -3,3 +3,6 @@ node_modules/
 .astro/
 .wrangler/
 .DS_Store
+
+# 原始 MacBinary 軟體封存（建構不需要；散布用的 .sit 放在 public/）
+*.sit.bin

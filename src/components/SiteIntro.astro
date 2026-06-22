@@ -5,4 +5,28 @@
   <section>目前正學習如何當一對兒女的爸爸。</section>
   <section>曾和朋友一起開過公司，上過雜誌，擔任 iPlayground 的 keynote speaker，加入過新創，玩過程式比賽，寫過在某族群間還算有名的工具軟體，服過兵役，念過大學，和朋友一起創立台灣城市單車聯盟，舉辦過沈默騎行、台北裸騎，擔任單車通勤日站長，單車臨界量常客，考過台語認證中高級，兩發各抽中一番賞A、B獎，帶環義冠軍搭捷運⋯⋯。有機會想把這些故事寫下來。</section>
   <section>最近的興趣是腳踏車、寫程式、學<ruby>台語<rt>tâi-gì</rt></ruby>。</section>
+  <nav class="site-nav"><a href="/software/" id="software-link">⎆ software</a><a href="/rss.xml">㋯ rss</a></nav>
 </header>
+
+<script>
+const link = document.getElementById('software-link');
+if (link) {
+  link.addEventListener('mouseenter', () => {
+    // Speculation Rules API (Chrome/Edge 109+)
+    if (HTMLScriptElement.supports?.('speculationrules') && !document.querySelector('script[type="speculationrules"]')) {
+      const spec = document.createElement('script');
+      spec.type = 'speculationrules';
+      spec.textContent = JSON.stringify({ prefetch: [{ urls: ['/software/'] }] });
+      document.head.appendChild(spec);
+    }
+    // Fallback: <link rel="prefetch"> (all browsers)
+    if (!document.querySelector('link[rel="prefetch"][href="/software/"]')) {
+      const pf = document.createElement('link');
+      pf.rel = 'prefetch';
+      pf.href = '/software/';
+      document.head.appendChild(pf);
+    }
+  }, { once: true });
+
+}
+</script>

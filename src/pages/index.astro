@@ -14,10 +14,7 @@ const storyGroups = groupStoriesByYear(stories);
   <div class="site-shell">
     <SiteIntro />
     <main>
-      <div class="feed-bar">
-        <a href="/rss.xml">[ RSS ]</a>
-      </div>
-      {storyGroups.map(([year, items]) => (
+{storyGroups.map(([year, items]) => (
         <section class="year-section">
           <h2 class="year-heading">{year}</h2>
           <ol class="story-list">

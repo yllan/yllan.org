@@ -1,14 +1,16 @@
 ---
-import SoftwareLayout from "../../layouts/SoftwareLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Launcher from "../../components/Launcher.astro";
+import { site } from "../../lib/site";
 ---
 
-<SoftwareLayout
-  title="Software"
-  description="yllan 寫的 Mac OS 9 軟體"
+<BaseLayout
+  title={`Software | ${site.title}`}
+  description="yllan's Mac OS 9 software"
   canonicalPath="/software/"
-  filename="Read Me.txt"
 >
-  <p>這裡放的是我寫的 Mac OS 9 軟體。</p>
-  <ul class="software-list">
-  </ul>
-</SoftwareLayout>
+  <div class="mac-desktop">
+    <Launcher />
+    <div id="detail-host"></div>
+  </div>
+</BaseLayout>

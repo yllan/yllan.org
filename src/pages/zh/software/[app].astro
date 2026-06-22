@@ -1,0 +1,34 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Launcher from "../../../components/Launcher.astro";
+import AppWindow from "../../../components/AppWindow.astro";
+import { site, softwareSlug } from "../../../lib/site";
+
+export const getStaticPaths = (async () => {
+  const apps = await getCollection("software");
+  return apps
+    .filter((app) => app.data.lang === "zh" && !app.data.draft)
+    .map((app) => ({
+      params: { app: softwareSlug(app) },
+      props: { app },
+    }));
+}) satisfies GetStaticPaths;
+
+const { app } = Astro.props;
+const slug = softwareSlug(app);
+---
+
+<BaseLayout
+  title={`${app.data.name} | ${site.title}`}
+  description={app.data.summary ?? `${app.data.name} — yllan 的 Mac OS 9 軟體`}
+  canonicalPath={`/zh/software/${slug}/`}
+>
+  <div class="mac-desktop">
+    <Launcher lang="zh" selected={slug} />
+    <div id="detail-host">
+      <AppWindow app={app} />
+    </div>
+  </div>
+</BaseLayout>

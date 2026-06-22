@@ -11,4 +11,20 @@ const stories = defineCollection({
   }),
 });
 
-export const collections = { stories };
+const software = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/software" }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      order: z.number().default(0),
+      lang: z.enum(["en", "zh"]).default("en"),
+      draft: z.boolean().default(false),
+      icon: image(),
+      iconLarge: image().optional(),
+      summary: z.string().optional(),
+      download: z.string().optional(),
+      version: z.string().optional(),
+    }),
+});
+
+export const collections = { stories, software };

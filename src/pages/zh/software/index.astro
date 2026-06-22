@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Launcher from "../../../components/Launcher.astro";
+import { site } from "../../../lib/site";
+---
+
+<BaseLayout
+  title={`軟體 | ${site.title}`}
+  description="yllan 的 Mac OS 9 軟體"
+  canonicalPath="/zh/software/"
+>
+  <div class="mac-desktop">
+    <Launcher lang="zh" />
+    <div id="detail-host"></div>
+  </div>
+</BaseLayout>

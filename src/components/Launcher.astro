@@ -1,0 +1,147 @@
+---
+import { getCollection } from "astro:content";
+import {
+  softwareSlug,
+  softwareUrlFor,
+  softwareIndexUrl,
+  type Lang,
+} from "../lib/site";
+
+interface Props {
+  lang?: Lang;
+  selected?: string;
+}
+
+const { lang = "en", selected } = Astro.props;
+
+const apps = (await getCollection("software"))
+  .filter((app) => app.data.lang === lang && !app.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+
+// 語言切換目標：若有開著的 app，指向另一語言的同一 app；否則指向另一語言的首頁。
+const enHref = selected ? softwareUrlFor(selected, "en") : softwareIndexUrl("en");
+const zhHref = selected ? softwareUrlFor(selected, "zh") : softwareIndexUrl("zh");
+---
+
+<div class="mac-window">
+  <div class="mac-titlebar">
+    <a href="/" class="mac-closebox" aria-label="Close"></a>
+    <span class="mac-stripe"></span>
+    <span class="mac-title">Software:
+      <span class="lang-switcher">
+      {
+        lang === "en" ? (
+          <span class="active">English</span>
+        ) : (
+          <a href={enHref}>English</a>
+        )
+      }
+      <span class="sep">/</span>
+      {
+        lang === "zh" ? (
+          <span class="active">中文</span>
+        ) : (
+          <a href={zhHref}>中文</a>
+        )
+      }
+      </span>
+    </span>
+    <span class="mac-stripe"></span>
+    <span class="mac-collapsebox"></span>
+  </div>
+  <div class="mac-content">
+    <div class="mac-launcher">
+      {
+        apps.map((app) => {
+          const slug = softwareSlug(app);
+          return (
+            <a
+              href={softwareUrlFor(slug, lang)}
+              class:list={["mac-app-icon", { "is-selected": slug === selected }]}
+              data-app={slug}
+            >
+              <div class="mac-icon-cell">
+                <img
+                  src={app.data.icon.src}
+                  width="32"
+                  height="32"
+                  alt={app.data.name}
+                />
+              </div>
+              <span class="mac-app-name">{app.data.name}</span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  // Progressive enhancement：/software 區段內的連結（app icon、close box、
+  // 語言切換）在有 JS 時改用 fetch 換 .mac-desktop，並 pushState；
+  // 無 JS 時全部是真實連結，直接換頁。用事件委派，所以 AJAX 換內容後仍有效。
+
+  const SECTION = /^\/(?:zh\/)?software\//;
+  const cache = new Map<string, string>();
+
+  async function load(url: string): Promise<Document> {
+    let html = cache.get(url);
+    if (html === undefined) {
+      const res = await fetch(url);
+      html = await res.text();
+      cache.set(url, html);
+    }
+    return new DOMParser().parseFromString(html, "text/html");
+  }
+
+  async function navigate(url: string, push: boolean) {
+    const doc = await load(url);
+    const next = doc.querySelector(".mac-desktop");
+    const current = document.querySelector(".mac-desktop");
+    if (!next || !current) {
+      location.assign(url);
+      return;
+    }
+    current.replaceWith(document.importNode(next, true));
+    if (doc.title) document.title = doc.title;
+    if (push) history.pushState({ url }, "", url);
+    window.scrollTo(0, 0);
+  }
+
+  function isPlainLeftClick(e: MouseEvent): boolean {
+    return (
+      e.button === 0 &&
+      !e.metaKey &&
+      !e.ctrlKey &&
+      !e.shiftKey &&
+      !e.altKey
+    );
+  }
+
+  // 點擊：攔截 /software 區段內的連結
+  document.addEventListener("click", (e) => {
+    const a = (e.target as Element).closest?.("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (!href || !SECTION.test(href)) return;
+    if (!isPlainLeftClick(e)) return;
+    e.preventDefault();
+    navigate(href, true);
+  });
+
+  // hover：預先抓取，加速
+  document.addEventListener("mouseover", (e) => {
+    const a = (e.target as Element).closest?.("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    if (href && SECTION.test(href) && !cache.has(href)) {
+      load(href).catch(() => {});
+    }
+  });
+
+  // 上一頁／下一頁
+  window.addEventListener("popstate", () => {
+    if (SECTION.test(location.pathname)) navigate(location.pathname, false);
+  });
+</script>
