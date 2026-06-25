@@ -33,3 +33,7 @@ version: 1.0.0
 | 版本 | 日期 | 變更 |
 | --- | --- | --- |
 | 1.0.0 | 2026-06-21 | 第一個公開版本：地圖捲動、縮放、書籤 |
+
+## Donate
+
+- [Buy Me a Coffee](https://buymeacoffee.com/yllan)
