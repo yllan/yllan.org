@@ -11,10 +11,10 @@ version: 1.1.0
 
 # Palaeomastodon
 
-**Palaeomastodon** 是 MacOS 9 上的 [Mastodon](https://joinmastodon.org/) App，趕快加入 Decentralized Social Network Fediverse Blah Blah Blah 吧！
+**Palaeomastodon** 是 Mac OS 9 上的 [Mastodon](https://joinmastodon.org/) App，趕快加入 Decentralized Social Network Fediverse Blah Blah Blah 吧！
 <strike>（警告，他不是 DeFi，不能讓你狠噱一大筆錢）</strike>
 
-Palaeomastodon （古乳齒象）是 Mastodon（乳齒象）的祖先，在 MacOS 9 這個充滿化石的地層裡，嗯，你懂的。
+Palaeomastodon （古乳齒象）是 Mastodon（乳齒象）的祖先，在 Mac OS 9 這個充滿化石的地層裡，嗯，你懂的。
 
 ![Palaeomastodon 發文](./Palaeomastodon-screenshot.png "Palaeomastodon 螢幕截圖")
 

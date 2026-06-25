@@ -33,7 +33,7 @@ version: 1.1.0
 
 | Version | Date | Changes |
 | --- | --- | --- |
-| 1.1.0 | 2026-06-24 | First public release: timeline, posting, emoji |
+| 1.1.0 | 2026-06-25 | First public release: timeline, posting, emoji |
 
 ## Donate
 
